@@ -24,10 +24,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/face-rec/", 
-        element: <Navigate to="/face-rec/page1" />, 
+        element: <Navigate to="/face-rec/main" />, 
       },
       {
-        path: "/face-rec/page1",
+        path: "/face-rec/main",
         element: <>
         <Suspense fallback={<Loader />}>
           <Page1 />
