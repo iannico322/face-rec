@@ -4,12 +4,10 @@ import * as faceapi from 'face-api.js'
 
 
 const Page1 = () => {
-  const [status,setStatus] = useState("Loading...")
+  const [status,setStatus] = useState("Training...")
   const MODEL_URL = "/face-rec/models"
   const videoRef:any = useRef()
   let canvasRef:any = useRef()
-
-  const  [LABELS] = useState(["Nico", "Mark","Alvin","Nideliza","Sittie"]) 
   const [camera, setCamera] = useState('environment');
   const [name,setName] = useState<any>([{
     "id":"Nico",
@@ -49,6 +47,66 @@ const Page1 = () => {
       "id":"Sittie",
       "name":"Ms. Sittie Rahma Alawi",
       "position":"DICT Region 10 Director"
+    },
+    {
+      "id":"Sarah",
+      "name":"Sarah Margaha",
+      "position":"My Everything"
+    },
+    {
+      "id":"Panky",
+      "name":"Bliss Francis “Panky” Acain",
+      "position":"Board Members District 2"
+    },
+    {
+      "id":"Yasay",
+      "name":"Dexter Yasay",
+      "position":"Board Members District 2"
+    },
+    {
+      "id":"Erick",
+      "name":"Fredrick “Erick” Yu Khu",
+      "position":"Board Members District 1"
+    },
+    {
+      "id":"Boboy",
+      "name":"Gerardo “Boboy” Sabal III",
+      "position":"Board Members District 2"
+    },
+    {
+      "id":"Unabia",
+      "name":"Hon.Peter Unabia",
+      "position":"Hon. Governor"
+    },
+    {
+      "id":"Pelaez",
+      "name":"Hon.Jeremy Jonahmar Pelaez",
+      "position":"Hon. Vice Governor"
+    },
+    {
+      "id":"Abing",
+      "name":"Jabi “Abing” Bernaldez",
+      "position":"Board Members District 1"
+    },
+    {
+      "id":"Emano",
+      "name":"Princess Nacional Emano",
+      "position":"Board Members District 2"
+    },
+    {
+      "id":"Buhisan",
+      "name":"Rey Buhisan",
+      "position":"Board Members District 1"
+    },
+    {
+      "id":"Say-say",
+      "name":"Syremae “Say-say” Neri Emano ",
+      "position":"Board Members District 2"
+    },
+    {
+      "id":"Win",
+      "name":"Wayne “Win” Militante",
+      "position":"Board Members District 1"
     }
 
 ])
@@ -102,15 +160,17 @@ const Page1 = () => {
 
   const getLabeledFaceDescriptions = useCallback(() => {
   return Promise.all(
-    LABELS.map(async (label) => {
+
+    Fersons.map(async (label:any) => {
       const descriptions = [];
       for (let i = 1; i <= 2; i++) {
-        const img = await faceapi.fetchImage(`./labels/${label}/${i}.jpg`);
+        const img = await faceapi.fetchImage(`./labels/${label.id}/${i}.jpg`);
         const detections: any = await getFaceDescriptor(img);
         descriptions.push(detections.descriptor);
       }
-      return new faceapi.LabeledFaceDescriptors(label, descriptions);
+      return new faceapi.LabeledFaceDescriptors(label.id, descriptions);
     })
+    
   );
 }, [getFaceDescriptor]);
 
@@ -164,7 +224,7 @@ const faceMyDetect = useCallback(async () => {
         <div className=" border border-border  flex flex-col gap-5 items-center justify-center h-screen w-full ">
         
         <div className=' text-foreground text-sm w-[300px] flex  justify-center'>
-          <p> v.1 Status: <span className={status=="Running"?" text-green-600":" text-red-500"}>{status}</span> </p>
+          <p className=' font-semibold text-lg'> Face Rex v.1</p>
         
         </div>
         
@@ -201,20 +261,14 @@ const faceMyDetect = useCallback(async () => {
 
     
       
-        <div className=" w-[300px]  flex  items-center justify-between text-foreground">
-          <RotateCcwIcon className={camera=='user'? ' rotate-180 transition-all duration-700': ' rotate-0 transition-all duration-700'}
-           onClick={()=>{
-            setCamera(prevState => prevState === 'user' ? 'environment' : 'user')
-            startVideo()
-            console.log(camera)
+        <div className=" w-[300px]  grid  justify-center items-center  grid-cols-3  ">
+         
+        <p className=' col-span-1 justify-start justify-self-start '><span className={status=="Running"?"  justify-end justify-self-end text-green-600":" text-red-500 justify-end justify-self-end"}>{status}</span></p>
 
-          }}
-          
-          />
           
 
           {!click?
-          <PauseIcon className=' col-span-1 self-center cursor-pointer' onClick={()=>{
+          <PauseIcon className=' text-foreground col-span-1 justify-center justify-self-center self-center cursor-pointer' onClick={()=>{
            
              videoRef.current.pause()
              isClick(true)
@@ -223,7 +277,7 @@ const faceMyDetect = useCallback(async () => {
          }}/>
          :
          <PlayIcon 
-         className=' col-span-1 text-center cursor-pointer' 
+         className=' text-foreground col-span-1 justify-center justify-self-center self-center cursor-pointer' 
          onClick={()=>{
            
           videoRef.current.play()
@@ -235,6 +289,15 @@ const faceMyDetect = useCallback(async () => {
           
         }
 
+<RotateCcwIcon className={camera=='user'? ' justify-end justify-self-end text-foreground rotate-180 transition-all duration-700 col-span-1 ': '  justify-end justify-self-end text-foreground col-span-1  rotate-0 transition-all duration-700'}
+           onClick={()=>{
+            setCamera(prevState => prevState === 'user' ? 'environment' : 'user')
+            startVideo()
+            console.log(camera)
+
+          }}/>
+
+        
 
           
           
