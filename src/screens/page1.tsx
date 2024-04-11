@@ -36,16 +36,16 @@ const Page1 = () => {
     {
       "id":"Alvin",
       "name":"Alvin Nuska",
-      "position":"PUTO King"
+      "position":"Gwapo King"
     },
     {
-      "id":"Nideliza",
-      "name":"Nideliza Fe O. Nacilla",
+      "id":"DICTMisOr.PD-Nideliza",
+      "name":"DICT Mis Or. PD-Nideliza Fe O. Nacilla",
       "position":"DICT Mis. Or. Provincial Director"
     },
     {
-      "id":"Sittie",
-      "name":"Ms. Sittie Rahma Alawi",
+      "id":"DICT10RD-Ms.Sittie",
+      "name":"DICT 10 RD-Ms. Sittie Rahma Alawi",
       "position":"DICT Region 10 Director"
     },
     {
@@ -107,7 +107,140 @@ const Page1 = () => {
       "id":"Win",
       "name":"Wayne “Win” Militante",
       "position":"PGMO-Board Members District 1"
+    },
+    {
+      "id":"Kho",
+      "name":"Marlon Chan Kho",
+      "position":"PGMO-Board Members District 1"
+    },
+    {
+      "id":"MayorLeonardo",
+      "name":"Hon. Mayor Leonardo L. Uy",
+      "position":"LIBERTAD-Mayor"
+    },
+    {
+      "id":"ViceMayorSharon",
+      "name":"Hon. Vice Mayor Sharon M. Ballangan",
+      "position":"LIBERTAD-Vice Mayor "
+    },
+    {
+      "id":"MayorWellie",
+      "name":"Hon. Mayor Wellie G. Lim",
+      "position":"LUGAIT-Mayor "
     }
+    ,
+    {
+      "id":"ViceMayorRoger",
+      "name":"Hon. Vice Mayor Roger G. Lim",
+      "position":"LUGAIT-Vice Mayor "
+    },
+    {
+      "id":"MayorCharlie",
+      "name":"Hon. Mayor Charlie B. Buhisan",
+      "position":"MAGSAYSAY(LINUGOS)-Mayor"
+    },
+    {
+      "id":"ViceMayorGrace",
+      "name":"Hon. Vice Mayor Grace B. Abao",
+      "position":"MAGSAYSAY(LINUGOS)-ViceMayor"
+    },
+    {
+      "id":"MayorStephen",
+      "name":"Hon. Mayor Stephen S. Tan",
+      "position":"MANTICAO-Mayor"
+    },
+    {
+      "id":"ViceMayorRoberto",
+      "name":"Hon. Vice Mayor Roberto M. Lagrosas",
+      "position":"MANTICAO-ViceMayor"
+    },
+    {
+      "id":"MayorDonato",
+      "name":"Hon. Mayor Donato N. Chan",
+      "position":"MEDINA-Mayor"
+    },
+    {
+      "id":"ViceMayorPaulo",
+      "name":"Hon. Vice Mayor Paulo B. Magallanes",
+      "position":"MEDINA-ViceMayor"
+    },
+
+
+
+
+
+    {
+      "id":"MayorDennis",
+      "name":"Hon. Mayor Dennis L. Roa",
+      "position":"NAAWAN-Mayor"
+    },
+    {
+      "id":"ViceMayorAllan",
+      "name":"Hon. Vice Mayor Allan B. Roa",
+      "position":"NAAWAN-ViceMayor"
+    },
+    {
+      "id":"MayorJayfrancis",
+      "name":"Hon. Mayor Jayfrancis D. Bago",
+      "position":"OPOL-Mayor"
+    },
+    {
+      "id":"ViceMayorDanilo",
+      "name":"Hon. Vice Mayor Danilo E. Daroy",
+      "position":"OPOL-ViceMayor"
+    },
+    {
+      "id":"MayorAngelo",
+      "name":"Hon. Mayor Angelo G. Capistrano",
+      "position":"SALAY-Mayor"
+    },
+    {
+      "id":"ViceMayorRey",
+      "name":"Hon. Vice Mayor Rey Amelto K. Tan",
+      "position":"SALAY-ViceMayor"
+    },
+    {
+      "id":"MayorMildred",
+      "name":"Hon. Mayor Mildred L. Mondigo",
+      "position":"SUGBONGCOGON-Mayor"
+    },
+    {
+      "id":"ViceMayorIvan",
+      "name":"Hon. Vice Mayor Ivan Chester E. Lagbas",
+      "position":"SUGBONGCOGON-ViceMayor"
+    },
+    {
+      "id":"MayorNadya",
+      "name":"Hon. Mayor Nadya B. Emano-Elipe",
+      "position":"TAGOLOAN-Mayor"
+    },
+    {
+      "id":"ViceMayorRobinson",
+      "name":"Hon. Vice Mayor Robinson V. Sabio",
+      "position":"TAGOLOAN-ViceMayor"
+    },
+    {
+      "id":"MayorJennie",
+      "name":"Hon. Mayor Jennie Rosalie U. Mendez",
+      "position":"VILLANUEVA-Mayor"
+    },
+    {
+      "id":"ViceMayorJeric",
+      "name":"Hon. Vice Mayor Jeric G. Emano",
+      "position":"VILLANUEVA-ViceMayor"
+    },
+    {
+      "id":"MayorRico",
+      "name":"Hon. Mayor Rico T. Taray",
+      "position":"TALISAYAN-Mayor"
+    },
+    {
+      "id":"ViceMayorRommel",
+      "name":"Hon. Vice Mayor Rommel C. Maslog",
+      "position":"TALISAYAN-ViceMayor"
+    },
+    
+
 
 ])
 
