@@ -56,57 +56,57 @@ const Page1 = () => {
     {
       "id":"Panky",
       "name":"Bliss Francis “Panky” Acain",
-      "position":"Board Members District 2"
+      "position":"PGMO-Board Members District 2"
     },
     {
       "id":"Yasay",
       "name":"Dexter Yasay",
-      "position":"Board Members District 2"
+      "position":"PGMO-Board Members District 2"
     },
     {
       "id":"Erick",
       "name":"Fredrick “Erick” Yu Khu",
-      "position":"Board Members District 1"
+      "position":"PGMO-Board Members District 1"
     },
     {
       "id":"Boboy",
       "name":"Gerardo “Boboy” Sabal III",
-      "position":"Board Members District 2"
+      "position":"PGMO-Board Members District 2"
     },
     {
       "id":"Unabia",
       "name":"Hon.Peter Unabia",
-      "position":"Hon. Governor"
+      "position":"PGMO-Governor"
     },
     {
       "id":"Pelaez",
       "name":"Hon.Jeremy Jonahmar Pelaez",
-      "position":"Hon. Vice Governor"
+      "position":"PGMO-Vice Governor"
     },
     {
       "id":"Abing",
       "name":"Jabi “Abing” Bernaldez",
-      "position":"Board Members District 1"
+      "position":"PGMO-Board Members District 1"
     },
     {
       "id":"Emano",
       "name":"Princess Nacional Emano",
-      "position":"Board Members District 2"
+      "position":"PGMO-Board Members District 2"
     },
     {
       "id":"Buhisan",
       "name":"Rey Buhisan",
-      "position":"Board Members District 1"
+      "position":"PGMO-Board Members District 1"
     },
     {
       "id":"Say-say",
       "name":"Syremae “Say-say” Neri Emano ",
-      "position":"Board Members District 2"
+      "position":"PGMO-Board Members District 2"
     },
     {
       "id":"Win",
       "name":"Wayne “Win” Militante",
-      "position":"Board Members District 1"
+      "position":"PGMO-Board Members District 1"
     }
 
 ])
