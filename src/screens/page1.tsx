@@ -28,11 +28,11 @@ const Page1 = () => {
       "name":"Hon. Emmanuel L. Jamis",
       "position":"ALUIJID - Mayor"
     },
-    {
-      "id":"ViceMayorAlvin",
-      "name":"Hon. Alvin Giovanni A. Labis",
-      "position":"ALUBIJID - Vice Mayor"
-    },
+    // {
+    //   "id":"ViceMayorAlvin",
+    //   "name":"Hon. Alvin Giovanni A. Labis",
+    //   "position":"ALUBIJID - Vice Mayor"
+    // },
     {
       "id":"MayorAlexis",
       "name":"Hon. Alexis S. Quina",
@@ -123,11 +123,11 @@ const Page1 = () => {
       "name":"Hon. Vice Mayor Jannus Ray Acas Estor",
       "position":"JASAAN - Vice Mayor"
     },
-    {
-      "id":"MayorDanilo",
-      "name":"Hon. Danilo “Junjun” Artadi Lagbas Jr.",
-      "position":"KINOGUITAN - Mayor"
-    },
+    // {
+    //   "id":"MayorDanilo",
+    //   "name":"Hon. Danilo “Junjun” Artadi Lagbas Jr.",
+    //   "position":"KINOGUITAN - Mayor"
+    // },
     {
       "id":"Nico",
       "name":"Ian Nico Caulin",
