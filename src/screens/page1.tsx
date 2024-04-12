@@ -24,6 +24,111 @@ const Page1 = () => {
 
   const [Fersons] = useState([
     {
+      "id":"MayorEmmanuel",
+      "name":"Hon. Emmanuel L. Jamis",
+      "position":"ALUIJID - Mayor"
+    },
+    {
+      "id":"ViceMayorAlvin",
+      "name":"Hon. Alvin Giovanni A. Labis",
+      "position":"ALUBIJID - Vice Mayor"
+    },
+    {
+      "id":"MayorAlexis",
+      "name":"Hon. Alexis S. Quina",
+      "position":"BALINGASAG - Mayor"
+    },
+    {
+      "id":"ViceMayorFelix",
+      "name":"Hon. Vice Mayor Felix H. Borromeo",
+      "position":"BALINGASAG - Vice Mayor"
+    },
+    {
+      "id":"MayorAaron",
+      "name":"Hon. Mayor Aaron Paul S. Unabia",
+      "position":"BALINGOAN - Mayor"
+    },
+    {
+      "id":"ViceMayorFranklin",
+      "name":"Hon. Franklin C. Panulaya",
+      "position":"BALINGOAN - Vice Mayor"
+    },
+    {
+      "id":"MayorDann",
+      "name":"Hon. Mayor Dann Isaiah D. Lusterio",
+      "position":"BINUANGAN - Mayor"
+    },
+    {
+      "id":"ViceMayorMichelle",
+      "name":"Hon. Michelle C. Abao",
+      "position":"BINUANGAN - Vice Mayor"
+    },
+    {
+      "id":"MayorEdgar",
+      "name":"Hon. Mayor Edgar Lignes",
+      "position":"EL SALVADOR CITY - Mayor"
+    },
+    {
+      "id":"ViceMayorMark",
+      "name":"Hon.  Mark William U. Tan",
+      "position":"EL SALVADOR CITY - Vice Mayor"
+    },
+    {
+      "id":"MayorEric",
+      "name":"Hon. Mayor Eric G. Canosa",
+      "position":"GINGOOG CITY - Mayor"
+    },
+    {
+      "id":"ViceMayorThaddeus",
+      "name":"Hon.  Thaddeus “Tadoy” Lugod",
+      "position":"GINGOOG CITY - Vice Mayor"
+    },
+    {
+      "id":"MayorMeraluna",
+      "name":"Hon. Meraluna S. Abrogar",
+      "position":"CLAVERIA - Mayor"
+    },
+    {
+      "id":"ViceMayorReynante",
+      "name":"Hon. Reynante L. Salvaleon",
+      "position":"CLAVERIA - Vice Mayor"
+    },
+    {
+      "id":"MayorMugot",
+      "name":"Hon. Mayor Emmanuel Mugot",
+      "position":"GITAGUM - Mayor"
+    },
+    {
+      "id":"ViceMayorRudy",
+      "name":"Hon. Rudy O. Damasing",
+      "position":"GITAGUM - Vice Mayor"
+    },
+    {
+      "id":"MayorMercy",
+      "name":"Hon. Mayor Mercy Grace “Gagay” J. Acain",
+      "position":"INITAO - Mayor"
+    },
+    {
+      "id":"ViceMayorEnerito",
+      "name":"Hon. Vice Mayor Enerito “Gogoy” J. Acain V",
+      "position":"INITAO - Vice Mayor"
+    },
+    {
+      "id":"MayorRedentor",
+      "name":"Hon. Mayor Redentor “Red” S. Jardin",
+      "position":"JASAAN - Mayor"
+    },
+    {
+      "id":"ViceMayorJannus",
+      "name":"Hon. Vice Mayor Jannus Ray Acas Estor",
+      "position":"JASAAN - Vice Mayor"
+    },
+    {
+      "id":"MayorDanilo",
+      "name":"Hon. Danilo “Junjun” Artadi Lagbas Jr.",
+      "position":"KINOGUITAN - Mayor"
+    },
+    {
       "id":"Nico",
       "name":"Ian Nico Caulin",
       "position":"Gwapo"
@@ -31,7 +136,7 @@ const Page1 = () => {
     {
       "id":"Mark",
       "name":"Mark Gil Rusiana",
-      "position":"OJT"
+      "position":"OJT - Black white blue red hacker"
     },
     {
       "id":"Alvin",
