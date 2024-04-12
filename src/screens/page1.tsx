@@ -94,6 +94,41 @@ const Page1 = () => {
       "position":"CLAVERIA - Vice Mayor"
     },
     {
+      "id":"MayorMugot",
+      "name":"Hon. Mayor Emmanuel Mugot",
+      "position":"GITAGUM - Mayor"
+    },
+    {
+      "id":"ViceMayorRudy",
+      "name":"Hon. Rudy O. Damasing",
+      "position":"GITAGUM - Vice Mayor"
+    },
+    {
+      "id":"MayorMercy",
+      "name":"Hon. Mayor Mercy Grace “Gagay” J. Acain",
+      "position":"INITAO - Mayor"
+    },
+    {
+      "id":"ViceMayorEnerito",
+      "name":"Hon. Vice Mayor Enerito “Gogoy” J. Acain V",
+      "position":"INITAO - Vice Mayor"
+    },
+    {
+      "id":"MayorRedentor",
+      "name":"Hon. Mayor Redentor “Red” S. Jardin",
+      "position":"JASAAN - Mayor"
+    },
+    {
+      "id":"ViceMayorJannus",
+      "name":"Hon. Vice Mayor Jannus Ray Acas Estor",
+      "position":"JASAAN - Vice Mayor"
+    },
+    {
+      "id":"MayorDanilo",
+      "name":"Hon. Danilo “Junjun” Artadi Lagbas Jr.",
+      "position":"KINOGUITAN - Mayor"
+    },
+    {
       "id":"Nico",
       "name":"Ian Nico Caulin",
       "position":"Gwapo"
