@@ -28,11 +28,11 @@ const Page1 = () => {
       "name":"Hon. Emmanuel L. Jamis",
       "position":"ALUIJID - Mayor"
     },
-    // {
-    //   "id":"ViceMayorAlvin",
-    //   "name":"Hon. Alvin Giovanni A. Labis",
-    //   "position":"ALUBIJID - Vice Mayor"
-    // },
+    {
+      "id":"ViceMayorAlvin",
+      "name":"Hon. Alvin Giovanni A. Labis",
+      "position":"ALUBIJID - Vice Mayor"
+    },
     {
       "id":"MayorAlexis",
       "name":"Hon. Alexis S. Quina",
@@ -123,11 +123,36 @@ const Page1 = () => {
       "name":"Hon. Vice Mayor Jannus Ray Acas Estor",
       "position":"JASAAN - Vice Mayor"
     },
-    // {
-    //   "id":"MayorDanilo",
-    //   "name":"Hon. Danilo “Junjun” Artadi Lagbas Jr.",
-    //   "position":"KINOGUITAN - Mayor"
-    // },
+    {
+      "id":"MayorDanilo",
+      "name":"Hon. Danilo “Junjun” Artadi Lagbas Jr.",
+      "position":"KINOGUITAN - Mayor"
+    },
+    {
+      "id":"ViceMayorTomas",
+      "name":"Hon. Vice Mayor Tomas M. Zarate",
+      "position":"KINOGUITAN - Vice Mayor"
+    },
+    {
+      "id":"MayorJay",
+      "name":"Hon. Mayor Jay Albert C. Puertas",
+      "position":"LAGONGLONG - Mayor"
+    },
+    {
+      "id":"ViceMayorMarita",
+      "name":"Hon. Vice Mayor Marita D. Ramonal",
+      "position":"LAGONGLONG - Vice Mayor"
+    },
+    {
+      "id":"MayorDiosdado",
+      "name":"Hon. Mayor Diosdado T. Obsioma",
+      "position":"LAGUINDINGAN - Mayor"
+    },
+    {
+      "id":"ViceMayorRoy",
+      "name":"Hon. Vice Mayor Roy I. Macua",
+      "position":"LAGUINDINGAN - Vice Mayor"
+    },
     {
       "id":"Nico",
       "name":"Ian Nico Caulin",
@@ -159,64 +184,64 @@ const Page1 = () => {
       "position":"My Everything"
     },
     {
-      "id":"Panky",
+      "id":"PGMOBMD2Bliss",
       "name":"Bliss Francis “Panky” Acain",
-      "position":"PGMO-Board Members District 2"
+      "position":"PGMO - Board Members District 2"
     },
     {
-      "id":"Yasay",
+      "id":"PGMOBMD2Dexter",
       "name":"Dexter Yasay",
-      "position":"PGMO-Board Members District 2"
+      "position":"PGMO - Board Members District 2"
     },
     {
-      "id":"Erick",
+      "id":"PGMOBMD1Fredrick",
       "name":"Fredrick “Erick” Yu Khu",
-      "position":"PGMO-Board Members District 1"
+      "position":"PGMO - Board Members District 1"
     },
     {
-      "id":"Boboy",
+      "id":"PGMOBMD2Gerardo",
       "name":"Gerardo “Boboy” Sabal III",
-      "position":"PGMO-Board Members District 2"
+      "position":"PGMO - Board Members District 2"
     },
     {
-      "id":"Unabia",
+      "id":"PGMOGovernorUnabia",
       "name":"Hon.Peter Unabia",
-      "position":"PGMO-Governor"
+      "position":"PGMO - Governor"
     },
     {
-      "id":"Pelaez",
+      "id":"PGMOViceGovernorJeremy",
       "name":"Hon.Jeremy Jonahmar Pelaez",
-      "position":"PGMO-Vice Governor"
+      "position":"PGMO - Vice Governor"
     },
     {
-      "id":"Abing",
+      "id":"PGMOBMD1Jabi",
       "name":"Jabi “Abing” Bernaldez",
-      "position":"PGMO-Board Members District 1"
+      "position":"PGMO - Board Members District 1"
     },
     {
-      "id":"Emano",
+      "id":"PGMOBMD2Princess",
       "name":"Princess Nacional Emano",
-      "position":"PGMO-Board Members District 2"
+      "position":"PGMO - Board Members District 2"
     },
     {
-      "id":"Buhisan",
+      "id":"PGMOBMD1Rey",
       "name":"Rey Buhisan",
-      "position":"PGMO-Board Members District 1"
+      "position":"PGMO - Board Members District 1"
     },
     {
-      "id":"Say-say",
+      "id":"PGMOBMD2Syremae",
       "name":"Syremae “Say-say” Neri Emano ",
-      "position":"PGMO-Board Members District 2"
+      "position":"PGMO - Board Members District 2"
     },
     {
-      "id":"Win",
+      "id":"PGMOBMD1Wayne",
       "name":"Wayne “Win” Militante",
-      "position":"PGMO-Board Members District 1"
+      "position":"PGMO - Board Members District 1"
     },
     {
-      "id":"Kho",
+      "id":"PGMOBMD1Marlon",
       "name":"Marlon Chan Kho",
-      "position":"PGMO-Board Members District 1"
+      "position":"PGMO - Board Members District 1"
     },
     {
       "id":"MayorLeonardo",
