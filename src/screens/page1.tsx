@@ -4,7 +4,7 @@ import * as faceapi from 'face-api.js'
 import faces from './faces.json'
 
 const Page1 = () => {
-  const [status,setStatus] = useState("Training...")
+  const [status,setStatus] = useState("Loading...")
   const MODEL_URL = "/face-rec/models"
   const videoRef:any = useRef()
   let canvasRef:any = useRef()
@@ -462,7 +462,7 @@ const faceMyDetect = useCallback(async () => {
   // Get faces.json here
   // console.log(labeledFaceDescriptors)
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors);
-  setStatus("Running")
+
 
   const detectFaces = async () => {
     const detections = await faceapi
@@ -481,8 +481,6 @@ const faceMyDetect = useCallback(async () => {
 
     canvasRef.current.getContext("2d").clearRect(0, 0,500, 600);
 
-    console.log(resizedDetections)
-
     const results = resizedDetections.map((d: any) => {
       return faceMatcher.findBestMatch(d.descriptor);
     });
@@ -498,6 +496,7 @@ const faceMyDetect = useCallback(async () => {
 
     requestAnimationFrame(detectFaces);
     setName(results)
+    setStatus("Running")
   };
   
   detectFaces();
