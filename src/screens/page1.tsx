@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { PauseIcon, PlayIcon,  RotateCcwIcon } from "lucide-react";
 import * as faceapi from 'face-api.js'
-import faces from './faces.json'
 
 const Page1 = () => {
   const [status,setStatus] = useState("Loading...")
@@ -419,48 +418,38 @@ const Page1 = () => {
   // LOAD MODELS FROM FACE API
 
  // Training HERE
-  // const getFaceDescriptor = useCallback(async (img: any) => {
-  //   return faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
-  // }, []);
-
-  // const getLabeledFaceDescriptions = async () => {
-  //   return Promise.all(
-  
-  //     Fersons.map(async (label:any) => {
-  //       const descriptions = [];
-  //       for (let i = 1; i <= 2; i++) {
-  //         const img = await faceapi.fetchImage(`./labels/${label.id}/${i}.jpg`);
-  //         const detections: any = await getFaceDescriptor(img);
-  //         descriptions.push(detections.descriptor);
-  //       }
-  //       console.log(descriptions)
-  //       return new faceapi.LabeledFaceDescriptors(label.id, descriptions);
-  //     })
-  
-      
-  //   );
-  // };
-  
- // Training HERE
-
- 
- // Testing HERE
+  const getFaceDescriptor = useCallback(async (img: any) => {
+    return faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
+  }, []);
 
   const getLabeledFaceDescriptions = async () => {
-  return Promise.all(
-    faces.map(async (label: any) => {
-      const descriptions = label.descriptors.map((arr: number[]) => new Float32Array(arr));
-      return new faceapi.LabeledFaceDescriptors(label.label, descriptions);
-  })
-    
-  );
-};
+    return Promise.all(
+  
+      Fersons.map(async (label:any) => {
+        const descriptions = [];
+        for (let i = 1; i <= 2; i++) {
+          const img = await faceapi.fetchImage(`./labels/${label.id}/${i}.jpg`);
+          const detections: any = await getFaceDescriptor(img);
+          descriptions.push(detections.descriptor);
+        }
+        console.log(descriptions)
+        return new faceapi.LabeledFaceDescriptors(label.id, descriptions);
+      })
+  
+      
+    );
+  };
+  
+
+ 
+
+
+
 
 
 const faceMyDetect = useCallback(async () => {
   const labeledFaceDescriptors = await getLabeledFaceDescriptions();
-  // Get faces.json here
-  // console.log(labeledFaceDescriptors)
+  console.log(labeledFaceDescriptors)
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors);
 
 
