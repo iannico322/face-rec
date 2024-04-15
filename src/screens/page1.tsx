@@ -437,8 +437,9 @@ const Page1 = () => {
 
 const faceMyDetect = useCallback(async () => {
   const labeledFaceDescriptors = await getLabeledFaceDescriptions();
+  console.log(labeledFaceDescriptors)
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors);
-  setStatus("Running")
+ 
 
   const detectFaces = async () => {
     const detections = await faceapi
@@ -471,6 +472,7 @@ const faceMyDetect = useCallback(async () => {
    
 
     requestAnimationFrame(detectFaces);
+    setStatus("Running")
     setName(results)
   };
   
@@ -484,7 +486,7 @@ const faceMyDetect = useCallback(async () => {
         <div className=" border border-border  flex flex-col gap-5 items-center justify-center h-screen w-full ">
         
         <div className=' text-foreground text-sm w-[300px] flex  justify-center'>
-          <p> v.1 Status: <span className={status=="Running"?" text-green-600":" text-red-500"}>{status}</span> </p>
+          <p> v.1 (Testing) Status: <span className={status=="Running"?" text-green-600":" text-red-500"}>{status}</span> </p>
         
         </div>
         
