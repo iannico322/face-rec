@@ -416,35 +416,6 @@ const Page1 = () => {
       console.log(err);
     });
 }, [camera, loadModels]); 
-  // LOAD MODELS FROM FACE API
-
- // Training HERE
-  // const getFaceDescriptor = useCallback(async (img: any) => {
-  //   return faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
-  // }, []);
-
-  // const getLabeledFaceDescriptions = async () => {
-  //   return Promise.all(
-  
-  //     Fersons.map(async (label:any) => {
-  //       const descriptions = [];
-  //       for (let i = 1; i <= 2; i++) {
-  //         const img = await faceapi.fetchImage(`./labels/${label.id}/${i}.jpg`);
-  //         const detections: any = await getFaceDescriptor(img);
-  //         descriptions.push(detections.descriptor);
-  //       }
-  //       console.log(descriptions)
-  //       return new faceapi.LabeledFaceDescriptors(label.id, descriptions);
-  //     })
-  
-      
-  //   );
-  // };
-  
- // Training HERE
-
- 
- // Testing HERE
 
   const getLabeledFaceDescriptions = async () => {
   return Promise.all(
@@ -459,8 +430,6 @@ const Page1 = () => {
 
 const faceMyDetect = useCallback(async () => {
   const labeledFaceDescriptors = await getLabeledFaceDescriptions();
-  // Get faces.json here
-  // console.log(labeledFaceDescriptors)
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors);
 
 
