@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { PauseIcon, PlayIcon,  RotateCcwIcon } from "lucide-react";
 import * as faceapi from 'face-api.js'
 
+
 const Page1 = () => {
   const [status,setStatus] = useState("Loading...")
   const MODEL_URL = "/face-rec/models"
@@ -368,8 +369,7 @@ const Page1 = () => {
       "name":"Hon. Vice Mayor Rommel C. Maslog",
       "position":"TALISAYAN-ViceMayor"
     },
-    
-
+  
 
 ])
 
@@ -378,18 +378,6 @@ const Page1 = () => {
     videoRef && loadModels()
 
   },[camera])
-
- const loadModels = useCallback(() => {
-    Promise.all([
-      faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL),
-      faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
-      faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
-      faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
-      faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
-    ]).then(() => {
-      faceMyDetect();
-    });
-  }, []);
 
   const startVideo = useCallback(() => {
     if (videoRef.current && videoRef.current.srcObject) {
@@ -404,54 +392,53 @@ const Page1 = () => {
     }
 
     navigator.mediaDevices
-    .getUserMedia({ video: { facingMode: camera } })
-    .then((currentStream) => {
-      if (videoRef.current) {
-        videoRef.current.srcObject = currentStream;
-        loadModels(); // Load models after video has started
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}, [camera, loadModels]); 
+      .getUserMedia({ video: { facingMode: camera } })
+      .then((currentStream) => {
+        if (videoRef.current) {
+          videoRef.current.srcObject = currentStream;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [camera]);
   // LOAD MODELS FROM FACE API
 
- // Training HERE
+  const loadModels = useCallback(() => {
+    Promise.all([
+      faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL),
+      faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+      faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+      faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
+      faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
+    ]).then(() => {
+      faceMyDetect();
+    });
+  }, []);
+
   const getFaceDescriptor = useCallback(async (img: any) => {
     return faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
   }, []);
 
-  const getLabeledFaceDescriptions = async () => {
-    return Promise.all(
-  
-      Fersons.map(async (label:any) => {
-        const descriptions = [];
-        for (let i = 1; i <= 2; i++) {
-          const img = await faceapi.fetchImage(`./labels/${label.id}/${i}.jpg`);
-          const detections: any = await getFaceDescriptor(img);
-          descriptions.push(detections.descriptor);
-        }
-        console.log(descriptions)
-        return new faceapi.LabeledFaceDescriptors(label.id, descriptions);
-      })
-  
-      
-    );
-  };
-  
-
- 
-
-
-
+  const getLabeledFaceDescriptions = useCallback(() => {
+  return Promise.all(
+    Fersons.map(async (label) => {
+      const descriptions = [];
+      for (let i = 1; i <= 2; i++) {
+        const img = await faceapi.fetchImage(`./labels/${label.id}/${i}.jpg`);
+        const detections: any = await getFaceDescriptor(img);
+        descriptions.push(detections.descriptor);
+      }
+      return new faceapi.LabeledFaceDescriptors(label.id, descriptions);
+    })
+  );
+}, [getFaceDescriptor]);
 
 
 const faceMyDetect = useCallback(async () => {
   const labeledFaceDescriptors = await getLabeledFaceDescriptions();
-  console.log(labeledFaceDescriptors)
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors);
-
+  setStatus("Running")
 
   const detectFaces = async () => {
     const detections = await faceapi
@@ -485,7 +472,6 @@ const faceMyDetect = useCallback(async () => {
 
     requestAnimationFrame(detectFaces);
     setName(results)
-    setStatus("Running")
   };
   
   detectFaces();
@@ -498,14 +484,14 @@ const faceMyDetect = useCallback(async () => {
         <div className=" border border-border  flex flex-col gap-5 items-center justify-center h-screen w-full ">
         
         <div className=' text-foreground text-sm w-[300px] flex  justify-center'>
-          <p className=' font-semibold text-lg'> Face Rex v.1.1</p>
+          <p> v.1 Status: <span className={status=="Running"?" text-green-600":" text-red-500"}>{status}</span> </p>
         
         </div>
         
         <div className=' overflow-hidden w-full max-w-[500px] h-[500px] relative flex'>
         <div className=' ml-2 mt-5 absolute gap-2 text-primary col-span-1 flex flex-col '>
         {name && name.map((response:any,key:any) => {
-        const matchedData = Fersons.find(item => item.id === response._label);
+        const matchedData:any = Fersons.find((item:any) => item.id === response._label);
         if (matchedData) {
           return (
             <div key={key} className=' text-sm bg-card/50 backdrop-blur-md p-2 rounded-md'>
@@ -535,14 +521,20 @@ const faceMyDetect = useCallback(async () => {
 
     
       
-        <div className=" w-[300px]  grid  justify-center items-center  grid-cols-3  ">
-         
-        <p className=' col-span-1 justify-start justify-self-start '><span className={status=="Running"?"  justify-end justify-self-end text-green-600":" text-red-500 justify-end justify-self-end"}>{status}</span></p>
+        <div className=" w-[300px]  flex  items-center justify-between text-foreground">
+          <RotateCcwIcon className={camera=='user'? ' rotate-180 transition-all duration-700': ' rotate-0 transition-all duration-700'}
+           onClick={()=>{
+            setCamera(prevState => prevState === 'user' ? 'environment' : 'user')
+            startVideo()
+            console.log(camera)
 
+          }}
+          
+          />
           
 
           {!click?
-          <PauseIcon className=' text-foreground col-span-1 justify-center justify-self-center self-center cursor-pointer' onClick={()=>{
+          <PauseIcon className=' col-span-1 self-center cursor-pointer' onClick={()=>{
            
              videoRef.current.pause()
              isClick(true)
@@ -551,7 +543,7 @@ const faceMyDetect = useCallback(async () => {
          }}/>
          :
          <PlayIcon 
-         className=' text-foreground col-span-1 justify-center justify-self-center self-center cursor-pointer' 
+         className=' col-span-1 text-center cursor-pointer' 
          onClick={()=>{
            
           videoRef.current.play()
@@ -563,15 +555,6 @@ const faceMyDetect = useCallback(async () => {
           
         }
 
-<RotateCcwIcon className={camera=='user'? ' justify-end justify-self-end text-foreground rotate-180 transition-all duration-700 col-span-1 ': '  justify-end justify-self-end text-foreground col-span-1  rotate-0 transition-all duration-700'}
-           onClick={()=>{
-            setCamera(prevState => prevState === 'user' ? 'environment' : 'user')
-            startVideo()
-            console.log(camera)
-
-          }}/>
-
-        
 
           
           
