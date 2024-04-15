@@ -418,7 +418,7 @@ const Page1 = () => {
 }, [camera, loadModels]); 
   // LOAD MODELS FROM FACE API
 
- 
+ // Training HERE
   // const getFaceDescriptor = useCallback(async (img: any) => {
   //   return faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
   // }, []);
@@ -440,12 +440,16 @@ const Page1 = () => {
       
   //   );
   // };
+  
+ // Training HERE
+
+ 
+ // Testing HERE
 
   const getLabeledFaceDescriptions = async () => {
   return Promise.all(
     faces.map(async (label: any) => {
       const descriptions = label.descriptors.map((arr: number[]) => new Float32Array(arr));
-      console.log(descriptions)
       return new faceapi.LabeledFaceDescriptors(label.label, descriptions);
   })
     
@@ -455,10 +459,9 @@ const Page1 = () => {
 
 const faceMyDetect = useCallback(async () => {
   const labeledFaceDescriptors = await getLabeledFaceDescriptions();
-
-  console.log(labeledFaceDescriptors)
+  // Get faces.json here
+  // console.log(labeledFaceDescriptors)
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors);
-  console.log(faceMatcher)
   setStatus("Running")
 
   const detectFaces = async () => {
@@ -507,7 +510,7 @@ const faceMyDetect = useCallback(async () => {
         <div className=" border border-border  flex flex-col gap-5 items-center justify-center h-screen w-full ">
         
         <div className=' text-foreground text-sm w-[300px] flex  justify-center'>
-          <p className=' font-semibold text-lg'> Face Rex v.1</p>
+          <p className=' font-semibold text-lg'> Face Rex v.1.1</p>
         
         </div>
         
