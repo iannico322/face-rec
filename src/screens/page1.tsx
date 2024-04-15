@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { PauseIcon, PlayIcon,  RotateCcwIcon } from "lucide-react";
 import * as faceapi from 'face-api.js'
-
+import faces from './faces.json'
 
 const Page1 = () => {
   const [status,setStatus] = useState("Training...")
@@ -355,6 +355,18 @@ const Page1 = () => {
 
   },[camera])
 
+ const loadModels = useCallback(() => {
+    Promise.all([
+      faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL),
+      faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+      faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+      faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
+      faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
+    ]).then(() => {
+      faceMyDetect();
+    });
+  }, []);
+
   const startVideo = useCallback(() => {
     if (videoRef.current && videoRef.current.srcObject) {
       let stream = videoRef.current.srcObject;
@@ -368,54 +380,39 @@ const Page1 = () => {
     }
 
     navigator.mediaDevices
-      .getUserMedia({ video: { facingMode: camera } })
-      .then((currentStream) => {
-        if (videoRef.current) {
-          videoRef.current.srcObject = currentStream;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [camera]);
+    .getUserMedia({ video: { facingMode: camera } })
+    .then((currentStream) => {
+      if (videoRef.current) {
+        videoRef.current.srcObject = currentStream;
+        loadModels(); // Load models after video has started
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, [camera, loadModels]); 
   // LOAD MODELS FROM FACE API
 
-  const loadModels = useCallback(() => {
-    Promise.all([
-      faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL),
-      faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
-      faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
-      faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
-      faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
-    ]).then(() => {
-      faceMyDetect();
-    });
-  }, []);
+ 
 
-  const getFaceDescriptor = useCallback(async (img: any) => {
-    return faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
-  }, []);
-
-  const getLabeledFaceDescriptions = useCallback(() => {
+  const getLabeledFaceDescriptions = async () => {
   return Promise.all(
-
-    Fersons.map(async (label:any) => {
-      const descriptions = [];
-      for (let i = 1; i <= 2; i++) {
-        const img = await faceapi.fetchImage(`./labels/${label.id}/${i}.jpg`);
-        const detections: any = await getFaceDescriptor(img);
-        descriptions.push(detections.descriptor);
-      }
-      return new faceapi.LabeledFaceDescriptors(label.id, descriptions);
-    })
+    faces.map(async (label: any) => {
+      const descriptions = label.descriptors.map((arr: number[]) => new Float32Array(arr));
+      console.log(descriptions)
+      return new faceapi.LabeledFaceDescriptors(label.label, descriptions);
+  })
     
   );
-}, [getFaceDescriptor]);
+};
 
 
 const faceMyDetect = useCallback(async () => {
   const labeledFaceDescriptors = await getLabeledFaceDescriptions();
+
+  console.log(labeledFaceDescriptors)
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors);
+  console.log(faceMatcher)
   setStatus("Running")
 
   const detectFaces = async () => {
@@ -434,6 +431,8 @@ const faceMyDetect = useCallback(async () => {
     });
 
     canvasRef.current.getContext("2d").clearRect(0, 0,500, 600);
+
+    console.log(resizedDetections)
 
     const results = resizedDetections.map((d: any) => {
       return faceMatcher.findBestMatch(d.descriptor);
