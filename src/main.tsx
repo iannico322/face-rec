@@ -8,12 +8,12 @@ import { Suspense, lazy } from "react";
 import NotFound from "./screens/notFound";
 import Loader from './components/loader/loader.tsx';
 
-const Page1= lazy(() =>
-  wait(1300).then(() => import("./screens/page1.tsx"))
+const Training= lazy(() =>
+  wait(1300).then(() => import("./screens/training.tsx"))
 );
 
-const Page2= lazy(() =>
-  wait(1300).then(() => import("./screens/page2.tsx"))
+const Main= lazy(() =>
+  wait(1300).then(() => import("./screens/main.tsx"))
 );
 
 const router = createBrowserRouter([
@@ -30,15 +30,15 @@ const router = createBrowserRouter([
         path: "/face-rec/main",
         element: <>
         <Suspense fallback={<Loader />}>
-          <Page1 />
+          <Main />
         </Suspense>
       </>,
       },
       {
-        path: "/face-rec/page2",
+        path: "/face-rec/training",
         element: <>
         <Suspense fallback={<Loader />}>
-          <Page2 />
+          <Training />
         </Suspense>
       </>,
       },
