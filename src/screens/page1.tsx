@@ -53,13 +53,13 @@ const Page1 = () => {
     startVideo();
   }, [camera, startVideo]);
 
-  function Refresh(){
+  // function Refresh(){
 
-    setFaces(JSON.parse(localStorage.getItem('CurrentData')||""))
-    setFersons(JSON.parse(localStorage.getItem('CurrentFersons')||""))
-    startVideo();
+  //   setFaces(JSON.parse(localStorage.getItem('CurrentData')||""))
+  //   setFersons(JSON.parse(localStorage.getItem('CurrentFersons')||""))
+  //   startVideo();
 
-  }
+  // }
 
   const getLabeledFaceDescriptions = useCallback(async () => {
     return Promise.all(
@@ -111,7 +111,7 @@ const Page1 = () => {
       <div className="border border-border flex flex-col gap-5 items-center justify-center h-screen w-full">
         <div className="text-foreground text-sm w-[300px] flex items-center gap-6 justify-center">
           <p className="font-semibold text-lg">Face Rex v.1.1</p>
-          <DrawerDemo Refresh={Refresh} />
+          <DrawerDemo  />
         </div>
         
         <div className="overflow-hidden w-full max-w-[500px] h-[500px] relative flex">

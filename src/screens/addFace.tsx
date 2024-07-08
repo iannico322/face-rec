@@ -9,15 +9,15 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Label } from "@radix-ui/react-dropdown-menu";
+
 
 import * as React from "react";
-import { useCallback, useState, useRef } from "react";
+import { useCallback} from "react";
 import * as faceapi from "face-api.js";
 
 const MODEL_URL = '/face-rec/models'; // adjust path according to your setup
 
-export function DrawerDemo({Refresh}:any) {
+export function DrawerDemo() {
   const [data, setData] = React.useState<any>({
     name: "",
     id: "",
@@ -26,31 +26,9 @@ export function DrawerDemo({Refresh}:any) {
   });
   const [previews, setPreviews] = React.useState<string[]>([]);
   const [loading, setLoading] = React.useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const startVideo = useCallback(() => {
-    if (videoRef.current && videoRef.current.srcObject) {
-      let stream = videoRef.current.srcObject as MediaStream;
-      let tracks = stream.getTracks();
   
-      tracks.forEach((track: MediaStreamTrack) => {
-        track.stop();
-      });
-  
-      videoRef.current.srcObject = null;
-    }
 
-    navigator.mediaDevices
-      .getUserMedia({ video: {} })
-      .then((currentStream) => {
-        if (videoRef.current) {
-          videoRef.current.srcObject = currentStream;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+ 
 
   const loadModels = useCallback(() => {
     Promise.all([
