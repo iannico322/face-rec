@@ -12,19 +12,66 @@ import {
 import { Label } from "@radix-ui/react-dropdown-menu";
 
 import * as React from "react";
+import { useCallback, useState, useRef } from "react";
+import * as faceapi from "face-api.js";
 
-export function DrawerDemo() {
+const MODEL_URL = '/face-rec/models'; // adjust path according to your setup
+
+export function DrawerDemo({Refresh}:any) {
   const [data, setData] = React.useState<any>({
     name: "",
-    label: "",
+    id: "",
+    position:"",
     photos: [],
   });
   const [previews, setPreviews] = React.useState<string[]>([]);
+  const [loading, setLoading] = React.useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  const handleFileChange = (event: any) => {
-    const files = Array.from(event.target.files);
+  const startVideo = useCallback(() => {
+    if (videoRef.current && videoRef.current.srcObject) {
+      let stream = videoRef.current.srcObject as MediaStream;
+      let tracks = stream.getTracks();
+  
+      tracks.forEach((track: MediaStreamTrack) => {
+        track.stop();
+      });
+  
+      videoRef.current.srcObject = null;
+    }
 
-    const newPreviews = files.map((file:any) => URL.createObjectURL(file));
+    navigator.mediaDevices
+      .getUserMedia({ video: {} })
+      .then((currentStream) => {
+        if (videoRef.current) {
+          videoRef.current.srcObject = currentStream;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const loadModels = useCallback(() => {
+    Promise.all([
+      faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL),
+      faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+      faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+      faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
+      faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
+    ]).then(() => {
+      console.log("Models loaded");
+    });
+  }, []);
+
+  const getFaceDescriptor = useCallback(async (img: HTMLImageElement) => {
+    return await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
+  }, []);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []);
+    const newPreviews = files.map((file) => URL.createObjectURL(file));
+
     setPreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);
 
     setData((prevData:any) => ({
@@ -41,6 +88,57 @@ export function DrawerDemo() {
     }));
   };
 
+  const handleSubmit = async () => {
+    setLoading(true);
+
+    const descriptions = await Promise.all(
+      data.photos.map(async (file: File) => {
+        const img = await faceapi.fetchImage(URL.createObjectURL(file));
+        const detection = await getFaceDescriptor(img);
+
+
+        return detection?.descriptor || [];
+      })
+    );
+
+    const labeledFaceDescriptors:any = {
+      label: data.name,
+      descriptors: descriptions.map(descriptor => 
+    Object.keys(descriptor)
+      .map(key => parseFloat(descriptor[key]))
+  )
+    };
+
+    const FersonsDescriptors:any = {
+        id: data.id,
+        name:data.name,
+        position: data.position,
+      };
+
+    let curFersons = JSON.parse(localStorage.getItem('CurrentFersons')||"")
+    let curData = JSON.parse(localStorage.getItem('CurrentData')||"")
+
+    let merge = [...curFersons,FersonsDescriptors]
+    
+    let merge2 = [...curData,labeledFaceDescriptors]
+    
+    localStorage.setItem('CurrentFersons',JSON.stringify(merge))
+    localStorage.setItem('CurrentData',JSON.stringify(merge2))
+
+    setData((prevData:any) => ({
+      ...prevData,
+      faceDescriptors: labeledFaceDescriptors,
+    }));
+
+    setLoading(false);
+    window.location.reload();
+    console.log(data);
+  };
+
+  React.useEffect(() => {
+    loadModels();
+  }, [loadModels]);
+
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -53,27 +151,33 @@ export function DrawerDemo() {
             <DrawerDescription>Upload face and wait for the model to train.</DrawerDescription>
           </DrawerHeader>
           <div className="p-4 pb-0">
-            <div className="flex text-foreground gap-4 flex-col  justify-center ">
-              <div className=" w-full">
-                <p>Label</p>
+            <div className="flex text-foreground gap-4 flex-col justify-center">
+              <div className="w-full">
+                <p>Label ID</p>
                 <input
                   type="text"
-                  value={data.label}
-                  onChange={(e: any) => {
-                    setData({ ...data, label: e.target.value });
-                  }}
+                  value={data.id}
+                  onChange={(e) => setData({ ...data, id: e.target.value })}
                   className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
                 />
               </div>
 
-              <div className=" w-full">
+              <div className="w-full">
                 <p>Name</p>
                 <input
                   type="text"
                   value={data.name}
-                  onChange={(e: any) => {
-                    setData({ ...data, name: e.target.value });
-                  }}
+                  onChange={(e) => setData({ ...data, name: e.target.value })}
+                  className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
+                />
+              </div>
+
+              <div className="w-full">
+                <p>Position</p>
+                <input
+                  type="text"
+                  value={data.position}
+                  onChange={(e) => setData({ ...data, position: e.target.value })}
                   className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
                 />
               </div>
@@ -114,11 +218,10 @@ export function DrawerDemo() {
           </div>
           <DrawerFooter>
             <Button
-              onClick={() => {
-                console.log(data);
-              }}
+              onClick={handleSubmit}
+              disabled={loading}
             >
-              Submit
+              {loading ? 'Processing...' : 'Submit'}
             </Button>
             <DrawerClose asChild>
               <Button variant="outline">Cancel</Button>

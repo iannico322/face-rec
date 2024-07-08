@@ -1,10 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { PauseIcon, PlayIcon, RotateCcwIcon } from "lucide-react";
 import * as faceapi from 'face-api.js';
-import faces from './faces.json';
+
 import { DrawerDemo } from './addFace';
 
 const Page1 = () => {
+
+  let [faces,setFaces] = useState(JSON.parse(localStorage.getItem('CurrentData')||"")) 
+  let [Fersons,setFersons] = useState(JSON.parse(localStorage.getItem('CurrentFersons')||"")) 
+
+
+
+  
   const [status, setStatus] = useState("Loading...");
   const MODEL_URL = "/face-rec/models";
   const videoRef = useRef<any>(null);
@@ -46,10 +53,18 @@ const Page1 = () => {
     startVideo();
   }, [camera, startVideo]);
 
+  function Refresh(){
+
+    setFaces(JSON.parse(localStorage.getItem('CurrentData')||""))
+    setFersons(JSON.parse(localStorage.getItem('CurrentFersons')||""))
+    startVideo();
+
+  }
+
   const getLabeledFaceDescriptions = useCallback(async () => {
     return Promise.all(
-      faces.map(async (label) => {
-        const descriptions = label.descriptors.map(arr => new Float32Array(arr));
+      faces.map(async (label:any) => {
+        const descriptions = label.descriptors.map((arr:any) => new Float32Array(arr));
         return new faceapi.LabeledFaceDescriptors(label.label, descriptions);
       })
     );
@@ -96,13 +111,13 @@ const Page1 = () => {
       <div className="border border-border flex flex-col gap-5 items-center justify-center h-screen w-full">
         <div className="text-foreground text-sm w-[300px] flex items-center gap-6 justify-center">
           <p className="font-semibold text-lg">Face Rex v.1.1</p>
-          <DrawerDemo />
+          <DrawerDemo Refresh={Refresh} />
         </div>
         
         <div className="overflow-hidden w-full max-w-[500px] h-[500px] relative flex">
           <div className="ml-2 mt-5 absolute gap-2 text-primary col-span-1 flex flex-col">
             {name && name.map((response:any, key) => {
-              const matchedData = JSON.parse(localStorage.getItem("CurrentFersons") || "[]").find((item:any) => item.id === response._label);
+              const matchedData = Fersons.find((item:any) => item.id === response._label);
               return matchedData ? (
                 <div key={key} className="text-sm bg-card/50 backdrop-blur-md p-2 rounded-md">
                   <h3>{matchedData.name}</h3>
