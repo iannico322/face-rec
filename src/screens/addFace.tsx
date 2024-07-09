@@ -120,7 +120,7 @@ export function DrawerDemo() {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button variant="outline">Open Drawer</Button>
+        <Button variant="outline">Add Face</Button>
       </DrawerTrigger>
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm">
@@ -136,7 +136,7 @@ export function DrawerDemo() {
                   type="text"
                   value={data.id}
                   onChange={(e) => setData({ ...data, id: e.target.value })}
-                  className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
+                  className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-foreground file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
                 />
               </div>
 
@@ -146,7 +146,7 @@ export function DrawerDemo() {
                   type="text"
                   value={data.name}
                   onChange={(e) => setData({ ...data, name: e.target.value })}
-                  className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
+                  className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-foreground file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
                 />
               </div>
 
@@ -156,20 +156,20 @@ export function DrawerDemo() {
                   type="text"
                   value={data.position}
                   onChange={(e) => setData({ ...data, position: e.target.value })}
-                  className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
+                  className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-foreground file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
                 />
               </div>
 
               <div className="flex-1 text-start w-full">
                 <p>Images</p>
-                <label className="text-sm text-gray-400 font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"></label>
+                <label className="text-sm text-foreground font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"></label>
                 <div className="grid w-full items-start">
                   <input
                     id="picture"
                     onChange={handleFileChange}
                     type="file"
                     multiple
-                    className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
+                    className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-foreground file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
                   />
                 </div>
                 <div className="preview mt-3 grid grid-cols-3 gap-2">

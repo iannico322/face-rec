@@ -6,8 +6,8 @@ import { DrawerDemo } from './addFace';
 
 const Page1 = () => {
 
-  let [faces,setFaces] = useState(JSON.parse(localStorage.getItem('CurrentData')||"")) 
-  let [Fersons,setFersons] = useState(JSON.parse(localStorage.getItem('CurrentFersons')||"")) 
+  let [faces,_setFaces] = useState(JSON.parse(localStorage.getItem('CurrentData')||"")) 
+  let [Fersons,_setFersons] = useState(JSON.parse(localStorage.getItem('CurrentFersons')||"")) 
 
 
 
@@ -130,22 +130,28 @@ const Page1 = () => {
           <canvas ref={canvasRef} className="w-full h-full absolute" />
         </div>
 
-        <div className="w-[300px] grid justify-center items-center grid-cols-3">
+        <div className="w-[300px]  grid justify-center items-center grid-cols-3">
           <p className="col-span-1 justify-start justify-self-start">
             <span className={status === "Running" ? "text-green-600" : "text-red-500"}>{status}</span>
           </p>
-
-          {isPlaying ? (
-            <PauseIcon className="text-foreground col-span-1 cursor-pointer" onClick={() => {
+            <div className=' flex justify-center'>
+            {isPlaying ? (
+            <PauseIcon className="text-foreground text-center self-center col-span-1 cursor-pointer" onClick={() => {
               videoRef.current.pause();
               setIsPlaying(false);
             }} />
           ) : (
-            <PlayIcon className="text-foreground col-span-1 cursor-pointer" onClick={() => {
+            <PlayIcon className="text-foreground text-center self-center col-span-1 cursor-pointer" onClick={() => {
               videoRef.current.play();
               setIsPlaying(true);
             }} />
           )}
+
+
+            </div>
+
+
+          
 
           <RotateCcwIcon
             className={`justify-end justify-self-end text-foreground col-span-1 ${camera === 'user' ? 'rotate-180' : 'rotate-0'} transition-all duration-700`}
